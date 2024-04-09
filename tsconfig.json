@@ -1,0 +1,47 @@
+{
+  "include": [
+    "src/**/*",
+  ],
+  "compilerOptions": {
+    "target": "es2018",
+    "types": [
+      "vitest/globals"
+    ],
+    "paths": {
+      "*": [
+        "./node_modules/*",
+      ]
+    },
+
+    /* Modules */
+    "module": "ES2020",
+    "rootDir": "src",
+
+    /* Emit */
+    "declaration": true,
+    "outDir": "./build",
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  }
+}
