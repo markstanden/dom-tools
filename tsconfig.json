@@ -9,11 +9,13 @@
     ],
     "paths": {
       "*": [
-        "./node_modules/*",
+        "./node_modules/*"
       ]
     },
 
     /* Modules */
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "NodeNext",
     "module": "ES2020",
     "rootDir": "src",
 
