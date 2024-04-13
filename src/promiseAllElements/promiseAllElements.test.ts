@@ -6,10 +6,10 @@ const REJECT_MESSAGE_TEXT = 'not found';
 // @vitest-environment happy-dom
 describe.concurrent('promiseAllElements tests:', () => {
 
-    test.concurrent(`should reject if all elements don't start or get added to the DOM`, {timeout: 200}, async ({ expect }) => {
+    test.concurrent(`should reject if all elements don't start or get added to the DOM`, {timeout: 500}, async ({ expect }) => {
         const promisedElement = promiseAllElements(
             ['[data-test="not-present"]', '[data-test="not-present-either"]'],
-            {initialTimeout: 1, count: 5},
+            {maxDuration: 200},
         );
 
         await expect(promisedElement).rejects.toContain(REJECT_MESSAGE_TEXT);
@@ -21,7 +21,7 @@ describe.concurrent('promiseAllElements tests:', () => {
 
         const promisedElement = promiseAllElements(
             [`[data-test="${label1}"]`, `[data-test="${label2}"]`],
-            { initialTimeout: 1, count: 5, }
+            { maxDuration: 10 }
         );
 
         expect.assertions(1);
@@ -42,12 +42,12 @@ describe.concurrent('promiseAllElements tests:', () => {
 
 
     test(`should return elements that appear after the function call, but within the check window`, async ({ expect }) => {
-        const [testButton1, label1] = addTestButton(100);
+        const [testButton1, label1] = addTestButton(50);
         const selector1 = `[data-test="${label1}"]`;
         const synchronousLookup1 = document.querySelector(selector1);
         expect(synchronousLookup1).not.toStrictEqual(testButton1);
 
-        const [testButton2, label2] = addTestButton(200);
+        const [testButton2, label2] = addTestButton(100);
         const selector2 = `[data-test="${label2}"]`;
         const synchronousLookup2 = document.querySelector(selector2);
         expect(synchronousLookup2).not.toStrictEqual(testButton2);
