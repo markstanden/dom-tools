@@ -161,3 +161,6 @@ dist
 
 # Local Netlify folder
 .netlify
+
+# Editor files
+.idea
