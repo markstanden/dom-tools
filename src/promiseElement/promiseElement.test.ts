@@ -1,55 +1,55 @@
-import {promiseElement} from "./promiseElement";
-import {createTestButton} from "../__testHelpers/createTestButton";
+import {promiseElement} from "./promiseElement.ts";
+import {addTestButton} from "../__testHelpers/addTestButton.js";
+
+const REJECT_MESSAGE_TEXT = 'not found'
 
 // @vitest-environment happy-dom
-describe.concurrent('initial test', () => {
+describe.concurrent('promiseElement tests:', () => {
 
-    test.concurrent(`should reject for elements that don't start or get added to the DOM`, async () => {
+    test.concurrent(`should reject for elements that don't start or get added to the DOM`, async ({expect}) => {
         const maxCount = 5;
         const initialTimeout = 1;
 
-        const promiseResult = async (): Promise<Element> =>
-            await promiseElement('[data-test="not-present"]', document, maxCount, initialTimeout);
+        const promisedElement = promiseElement('[data-test="not-present"]', document, maxCount, initialTimeout);
 
-        await expect(promiseResult()).rejects.contains('not found')
+        await expect(promisedElement).rejects.toContain(REJECT_MESSAGE_TEXT);
     });
 
-    test.concurrent(`should reject for elements that appear too late`, async () => {
-        const testButton = createTestButton('appears-too-late');
-        setTimeout(() => document.body.appendChild(testButton), 250);
+    test.concurrent(`should reject for elements that appear too late`, async ({task, expect}) => {
+        const [_testButton, label] = addTestButton(task, true, 100);
 
         const maxCount = 5;
         const initialTimeout = 1;
 
-        const promiseResult = async (): Promise<Element> =>
-            await promiseElement('[data-test="appears-too-late"]', document, maxCount, initialTimeout);
+        const promisedElement = promiseElement(`[data-test="${label}"]`, document, maxCount, initialTimeout);
 
-        await expect(promiseResult()).rejects.contains('not found')
+        expect.assertions(1);
+        await expect(promisedElement).rejects.toContain(REJECT_MESSAGE_TEXT);
     });
 
-    test.concurrent(`should resolve for elements already in the DOM`, async () => {
-        const testButton = createTestButton('is-present-at-call-time');
-        document.body.appendChild(testButton);
+    test.concurrent(`should resolve for elements already in the DOM`,  async ({task, expect}) => {
+        const [testButton, label] = addTestButton(task, false);
 
-        const result = await promiseElement(`[data-test="is-present-at-call-time"]`);
+        const result = promiseElement(`[data-test="${label}"]`);
 
-        expect(result).toStrictEqual(testButton);
+        expect.assertions(1);
+        expect(result).resolves.toStrictEqual(testButton);
     });
 
-    test.concurrent(`should return elements that appear after the function call, but within the check window`, async () => {
-        const label = 'appears-during-the-check-window';
-        const testButton = createTestButton(label);
-        setTimeout(() => document.body.appendChild(testButton), 25);
 
-        const maxCount = 10;
+    test.concurrent(`should return elements that appear after the function call, but within the check window`, async ({task, expect}) => {
+        const [testButton, label] = addTestButton(task, true, 50);
+
+        const maxCount = 8;
         const initialTimeout = 1;
-        const selector = `[data-test="${label}"]`
+        const selector = `[data-test="${label}"]`;
 
         const synchronousLookup = document.querySelector(selector);
-        const promiseResult = async (): Promise<Element> =>
-            await promiseElement(selector, document, maxCount, initialTimeout);
+        const promisedElement = promiseElement(selector, document, maxCount, initialTimeout);
 
+        expect.assertions(2);
         expect(synchronousLookup).not.toStrictEqual(testButton);
-        await expect(promiseResult()).resolves.toStrictEqual(testButton);
+        await expect(promisedElement).resolves.toStrictEqual(testButton);
     });
+
 })

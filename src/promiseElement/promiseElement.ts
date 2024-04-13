@@ -16,6 +16,7 @@ export function promiseElement(
         const element = document.querySelector(selector);
         if (element) {
             resolve(element);
+            return;
         } else {
             count < 1
                 ? reject(
