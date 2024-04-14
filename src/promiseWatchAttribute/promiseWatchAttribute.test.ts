@@ -1,14 +1,12 @@
 import {promiseWatchAttribute} from "./promiseWatchAttribute.ts";
-import {createTestButton} from "../__testHelpers/createTestButton.ts";
 import {expect} from "vitest";
+import { createTestElement } from '../__testHelpers/createTestElement.js';
 
 // @vitest-environment happy-dom
 describe.concurrent('promiseWatchAttribute tests:', () => {
 
-    test.concurrent('Promise should resolve to the new value if the attribute mutates', async (test) => {
-        const testName = test.task.name;
-        const buttonName = `watchAttribute-${testName}`;
-        const testButton = createTestButton(buttonName);
+    test.concurrent('Promise should resolve to the new value if the attribute mutates', async () => {
+        const [testButton, buttonName] = createTestElement('button')();
         document.body.appendChild(testButton)
 
         const promise = promiseWatchAttribute(testButton, "data-test")
