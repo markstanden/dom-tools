@@ -70,9 +70,9 @@ describe('peek', () => {
 
         initial.map(_peek);
 
-        expect(logger).toHaveBeenCalledWith('Test:', 'first');
-        expect(logger).toHaveBeenCalledWith('Test:', 'second');
-        expect(logger).toHaveBeenCalledWith('Test:', 'third');
+        expect(logger).toHaveBeenNthCalledWith(1, 'Test:', 'first');
+        expect(logger).toHaveBeenNthCalledWith(2, 'Test:', 'second');
+        expect(logger).toHaveBeenNthCalledWith(3, 'Test:', 'third');
     });
 
     it.concurrent(
@@ -84,11 +84,11 @@ describe('peek', () => {
 
             initial.map(_peek);
 
-            expect(logger).toHaveBeenCalledWith('first');
-            expect(logger).toHaveBeenCalledWith('second');
-            expect(logger).toHaveBeenCalledWith('third');
-            expect(logger).toHaveBeenCalledWith('fourth');
-            expect(logger).toHaveBeenCalledWith('fifth');
+            expect(logger).toHaveBeenNthCalledWith(1, 'first');
+            expect(logger).toHaveBeenNthCalledWith(2, 'second');
+            expect(logger).toHaveBeenNthCalledWith(3, 'third');
+            expect(logger).toHaveBeenNthCalledWith(4, 'fourth');
+            expect(logger).toHaveBeenNthCalledWith(5, 'fifth');
         }
     );
 
@@ -105,15 +105,15 @@ describe('peek', () => {
 
             initial.map(_peek);
 
-            expect(logger).toHaveBeenCalledWith('Tuple:', [
+            expect(logger).toHaveBeenNthCalledWith(1, 'Tuple:', [
                 'first',
                 'firstVal',
             ]);
-            expect(logger).toHaveBeenCalledWith('Tuple:', [
+            expect(logger).toHaveBeenNthCalledWith(2, 'Tuple:', [
                 'second',
                 'secondVal',
             ]);
-            expect(logger).toHaveBeenCalledWith('Tuple:', [
+            expect(logger).toHaveBeenNthCalledWith(3, 'Tuple:', [
                 'third',
                 'thirdVal',
             ]);
@@ -133,9 +133,9 @@ describe('peek', () => {
 
             initial.map(_peek);
 
-            expect(logger).toHaveBeenCalledWith(['first', 'firstVal']);
-            expect(logger).toHaveBeenCalledWith(['second', 'secondVal']);
-            expect(logger).toHaveBeenCalledWith(['third', 'thirdVal']);
+            expect(logger).toHaveBeenNthCalledWith(1, ['first', 'firstVal']);
+            expect(logger).toHaveBeenNthCalledWith(2, ['second', 'secondVal']);
+            expect(logger).toHaveBeenNthCalledWith(3, ['third', 'thirdVal']);
         }
     );
 });
