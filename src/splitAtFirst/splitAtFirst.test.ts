@@ -46,7 +46,7 @@ describe.concurrent('splitAtFirst', async () => {
                 const splitAtFirstComma = splitAtFirst(',');
                 const initial = 'first second third fourth fifth';
 
-                const [before, _after] = splitAtFirstComma(initial);
+                const [before] = splitAtFirstComma(initial);
 
                 expect(before).toEqual(initial);
             }
@@ -58,8 +58,9 @@ describe.concurrent('splitAtFirst', async () => {
                 const splitAtFirstComma = splitAtFirst(',');
                 const initial = 'first second third fourth fifth';
 
-                const [_before, after] = splitAtFirstComma(initial);
+                const [before, after] = splitAtFirstComma(initial);
 
+                expect(before).toBeTruthy();
                 expect(after).toBeFalsy();
             }
         );
