@@ -7,11 +7,10 @@
     "prettier"
   ],
   "rules": {
-    "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
-      "error"
+      "warn"
     ],
-    "no-console": 1,
+    "no-console": "warn",
     "curly": [
       "error",
       "all"
@@ -25,14 +24,10 @@
     "lines-around-comment": [
       "warn",
       {
-        "beforeBlockComment": true,
-        "beforeLineComment": true,
+        "afterBlockComment": true,
         "allowBlockStart": true,
-        "allowBlockEnd": true,
         "allowObjectStart": true,
-        "allowObjectEnd": true,
-        "allowArrayStart": true,
-        "allowArrayEnd": true
+        "allowArrayStart": true
       }
     ]
   },

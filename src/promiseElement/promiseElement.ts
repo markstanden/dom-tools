@@ -1,8 +1,8 @@
 export type PromiseElementConfig = {
-    parent?: Node,
-    initialTimeout?: number,
-    maxDuration?: number,
-}
+    parent?: Node;
+    initialTimeout?: number;
+    maxDuration?: number;
+};
 
 /**
  * Returns a promise of an element that may or may not be present in the DOM.
@@ -13,32 +13,34 @@ export type PromiseElementConfig = {
  * @param {number?} config.maxDuration The max duration to wait for the element to become available, after which the promise is rejected.
  * @returns {Promise<Element>}
  */
-export function promiseElement(selector: string, config?: PromiseElementConfig
-): Promise<Element> {
+export function promiseElement<T extends Element>(
+    selector: string,
+    config?: PromiseElementConfig
+): Promise<T> {
     const parent = config?.parent ?? document;
     const maxDuration = config?.maxDuration ?? 2000;
     const initialTimeout = config?.initialTimeout ?? 1;
 
     return new Promise((resolve, reject) => {
-        const element = document.querySelector(selector);
+        const element = document.querySelector(selector) as T | null;
         if (element) {
             resolve(element);
             return;
         } else {
-            initialTimeout >= (maxDuration / 2)
+            initialTimeout >= maxDuration / 2
                 ? reject(
                       `element with selector ${selector} not found with parent ${parent.nodeName}`
                   )
                 : setTimeout(() => {
                       resolve(
-                          promiseElement(
-                              selector,
-                              {
-                                  parent,
-                                  maxDuration,
-                                  initialTimeout: Math.min(initialTimeout * 2, maxDuration - initialTimeout)
-                              }
-                          )
+                          promiseElement(selector, {
+                              parent,
+                              maxDuration,
+                              initialTimeout: Math.min(
+                                  initialTimeout * 2,
+                                  maxDuration - initialTimeout
+                              ),
+                          })
                       );
                   }, initialTimeout);
         }
