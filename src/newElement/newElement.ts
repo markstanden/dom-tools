@@ -1,4 +1,4 @@
-import { asClassName } from '../asClassName/asClassName.js';
+import { asClassname } from '../asClassName/asClassname.js';
 
 /**
  * Returns a new HTML element with the provided cssClasses as classnames
@@ -12,7 +12,7 @@ export function newElement<T = HTMLElement>(
 ): T {
     const newElement = document.createElement(tagName);
     if (cssClasses && cssClasses.length > 0) {
-        newElement.classList.add(...cssClasses.map(asClassName));
+        newElement.classList.add(...cssClasses.map(asClassname));
     }
     return newElement as T;
 }
