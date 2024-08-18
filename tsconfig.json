@@ -2,8 +2,11 @@
   "include": [
     "src/**/*"
   ],
+  "exclude": [
+    "src/**/*.test.*"
+  ],
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es2020",
     "types": [
       "vitest/globals"
     ],
@@ -13,9 +16,8 @@
       ]
     },
     /* Modules */
-    "allowImportingTsExtensions": false,
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "moduleResolution": "Bundler",
+    "module": "ES2020",
     "rootDir": "src",
     /* Emit */
     "declaration": true,

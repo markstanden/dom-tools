@@ -1,7 +1,4 @@
-import {
-    promiseElement,
-    PromiseElementConfig,
-} from '../promiseElement/promiseElement.ts';
+import { promiseElement, PromiseElementConfig } from '../promiseElement/promiseElement';
 
 /**
  * Returns a promise of an element that may or may not be present in the DOM.
@@ -11,10 +8,10 @@ import {
  */
 export function promiseAllElements(
     selectors: string[],
-    config?: PromiseElementConfig
+    config?: PromiseElementConfig,
 ): Promise<Element[]> {
     const promisedElements = selectors.map((selector) =>
-        promiseElement(selector, config)
+        promiseElement(selector, config),
     );
     return Promise.all(promisedElements);
 }

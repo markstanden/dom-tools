@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { listFormatter } from './listFormatter.ts';
+import { listFormatter } from './listFormatter';
 
 describe.concurrent('listFormatter', async () => {
     describe.concurrent('using the default arguments', async () => {
@@ -13,7 +13,7 @@ describe.concurrent('listFormatter', async () => {
                 const result = formatList(...initial);
 
                 expect(result).toEqual(expected);
-            }
+            },
         );
 
         it.concurrent(
@@ -26,7 +26,7 @@ describe.concurrent('listFormatter', async () => {
                 const result = formatList(...initial);
 
                 expect(result).toEqual(expected);
-            }
+            },
         );
 
         it.concurrent(
@@ -39,7 +39,7 @@ describe.concurrent('listFormatter', async () => {
                 const result = formatList(...initial);
 
                 expect(result).toEqual(expected);
-            }
+            },
         );
 
         it.concurrent(
@@ -52,7 +52,7 @@ describe.concurrent('listFormatter', async () => {
                 const result = formatList(...initial);
 
                 expect(result).toEqual(expected);
-            }
+            },
         );
     });
 
@@ -67,7 +67,7 @@ describe.concurrent('listFormatter', async () => {
                 const result = formatList(...initial);
 
                 expect(result).toEqual(expected);
-            }
+            },
         );
 
         it.concurrent(
@@ -80,7 +80,7 @@ describe.concurrent('listFormatter', async () => {
                 const result = formatList(...initial);
 
                 expect(result).toEqual(expected);
-            }
+            },
         );
     });
 });

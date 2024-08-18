@@ -1,10 +1,10 @@
-import { prefixedLogging } from './prefixedLogging.js';
+import { prefixedLogging } from './prefixedLogging';
 
 const DEFAULT_PREFIX = 'LOG ENTRY';
 
 export function prefixedConsole(prefix: string = DEFAULT_PREFIX) {
     /**
-     * Creates a prefixed error string with the test ID, and sends to console log.
+     * Function that prefixes the preset prefix, and sends to console log.
      * These errors display in the local console only.
      * @param {...any[]} logItems
      * @returns {void}
@@ -14,7 +14,7 @@ export function prefixedConsole(prefix: string = DEFAULT_PREFIX) {
     }
 
     /**
-     * Creates a prefixed error string with the test ID, and sends to console warn.
+     * Function that prefixes the preset prefix, and sends to console warn.
      * @param {...any[]} logItems
      * @returns {void}
      */
@@ -23,7 +23,7 @@ export function prefixedConsole(prefix: string = DEFAULT_PREFIX) {
     }
 
     /**
-     * Creates a prefixed error string with the test ID, and sends to console error.
+     * Function that prefixes the preset prefix, and sends to console error.
      * @param {...any[]} logItems
      * @returns {void}
      */

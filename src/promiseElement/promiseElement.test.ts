@@ -1,5 +1,5 @@
-import { promiseElement } from './promiseElement.ts';
-import { addTestButton } from '../__testHelpers/addTestButton.js';
+import { promiseElement } from './promiseElement';
+import { addTestButton } from '../__testHelpers/addTestButton';
 
 const REJECT_MESSAGE_TEXT = 'not found';
 
