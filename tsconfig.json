@@ -1,6 +1,6 @@
 {
   "include": [
-    "src/**/*",
+    "src/**/*"
   ],
   "compilerOptions": {
     "target": "es2018",
@@ -12,18 +12,15 @@
         "./node_modules/*"
       ]
     },
-
     /* Modules */
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "moduleResolution": "NodeNext",
-    "module": "ES2020",
+    "module": "NodeNext",
     "rootDir": "src",
-
     /* Emit */
     "declaration": true,
     "outDir": "./build",
     "forceConsistentCasingInFileNames": true,
-
     /* Type Checking */
     "strict": true,
     "noImplicitAny": true,
@@ -42,7 +39,6 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-
     /* Completeness */
     "skipLibCheck": true
   }
