@@ -8,7 +8,7 @@ export type PromiseElementConfig = {
  * @param {string} selector The CSS selector of the element to return when available
  * @param {object?} config
  * @param {Element?} config.parent the parent element node (defaults to 'document')
- * @param {number?} config.maxDuration The max duration to wait for the element to become available, after which the promise is rejected.
+ * @param {number?} config.maxDuration The max duration to wait for the element to become available, after which the promise is rejected. defaults to 10 seconds
  * @returns {Promise<Element>}
  */
 export function promiseElement<T extends Element>(
@@ -16,7 +16,7 @@ export function promiseElement<T extends Element>(
     config?: PromiseElementConfig,
 ): Promise<T> {
     const parent: Element | Document = config?.parent ?? document;
-    const maxDuration = config?.maxDuration;
+    const maxDuration = config?.maxDuration ?? 10000;
 
     return new Promise((resolve, reject) => {
         const timeout = setTimeout(
