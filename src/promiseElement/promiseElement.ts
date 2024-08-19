@@ -14,11 +14,8 @@ export type PromiseElementConfig = {
  */
 export function promiseElement<T extends Element = Element>(
     selector: string,
-    config?: PromiseElementConfig
+    { parent = document, maxDuration = 10000 }: PromiseElementConfig = {}
 ): Promise<T> {
-    const parent: Element | Document = config?.parent ?? document;
-    const maxDuration = config?.maxDuration ?? 10000;
-
     return new Promise((resolve, reject) => {
         // If already in the DOM immediately resolve
         const element = parent.querySelector(selector) as T | null;

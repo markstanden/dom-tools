@@ -12,13 +12,13 @@ describe.concurrent('promiseElement tests:', () => {
 
             const promisedElement = promiseElement(
                 '[data-test="not-present"]',
-                { maxDuration },
+                { maxDuration }
             );
 
             await expect(promisedElement).rejects.toContain(
-                REJECT_MESSAGE_TEXT,
+                REJECT_MESSAGE_TEXT
             );
-        },
+        }
     );
 
     test.concurrent(
@@ -33,9 +33,9 @@ describe.concurrent('promiseElement tests:', () => {
 
             expect.assertions(1);
             await expect(promisedElement).rejects.toContain(
-                REJECT_MESSAGE_TEXT,
+                REJECT_MESSAGE_TEXT
             );
-        },
+        }
     );
 
     test.concurrent(
@@ -47,7 +47,7 @@ describe.concurrent('promiseElement tests:', () => {
 
             expect.assertions(1);
             expect(result).resolves.toStrictEqual(testButton);
-        },
+        }
     );
 
     test.concurrent(
@@ -65,7 +65,7 @@ describe.concurrent('promiseElement tests:', () => {
 
             expect.assertions(2);
             await expect(promisedElement).resolves.toStrictEqual(testButton);
-        },
+        }
     );
 
     test.concurrent(
@@ -83,6 +83,6 @@ describe.concurrent('promiseElement tests:', () => {
             expect(promisedElement).not.toEqual(testButton);
             await expect(promisedElement).resolves.toStrictEqual(testButton);
             expect.assertions(3);
-        },
+        }
     );
 });
