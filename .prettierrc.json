@@ -8,5 +8,6 @@
   "semi": true,
   "singleQuote": true,
   "singleAttributePerLine": true,
-  "quoteProps": "consistent"
+  "quoteProps": "consistent",
+  "lineWidth": 80
 }
