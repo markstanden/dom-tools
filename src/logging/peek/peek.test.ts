@@ -1,11 +1,14 @@
 import { describe, vi } from 'vitest';
 import { peek } from './peek.js';
 
-const getMockLogger = () => vi.fn(() => (..._logItem: any[]): void => {});
+const getMockLogger = () =>
+    vi.fn(() => (..._logItem: any[]): void => {
+    });
 
 describe('peek', () => {
     it.concurrent('should not affect passed arguments', async ({ expect }) => {
-        const _peek = peek('String');
+        const logger = getMockLogger();
+        const _peek = peek('String', logger);
         const initial = ['first', 'second', 'third', 'fourth', 'fifth'];
         const expected = initial;
 
@@ -17,7 +20,8 @@ describe('peek', () => {
     it.concurrent(
         'does not affect multiple arguments passed as a tuple',
         async ({ expect }) => {
-            const _peek = peek('Tuple');
+            const logger = getMockLogger();
+            const _peek = peek('Tuple', logger);
             const initial = [
                 ['first', 'firstVal'],
                 ['second', 'secondVal'],
@@ -30,13 +34,14 @@ describe('peek', () => {
             const result = initial.map(_peek);
 
             expect(result).toEqual(expected);
-        }
+        },
     );
 
     it.concurrent(
         'does not affect multiple arguments passed as an object ',
         async ({ expect }) => {
-            const _peek = peek('Object');
+            const logger = getMockLogger();
+            const _peek = peek('Object', logger);
             const initial = [
                 { first: 'firstVal' },
                 { second: 'secondVal' },
@@ -49,7 +54,7 @@ describe('peek', () => {
             const result = initial.map(_peek);
 
             expect(result).toEqual(expected);
-        }
+        },
     );
 
     it.concurrent('calls the logger once per item', async ({ expect }) => {
@@ -76,7 +81,7 @@ describe('peek', () => {
     });
 
     it.concurrent(
-        "doesn't add an empty string prefix to the log",
+        'doesn\'t add an empty string prefix to the log',
         async ({ expect }) => {
             const logger = getMockLogger();
             const _peek = peek(undefined, logger);
@@ -89,7 +94,7 @@ describe('peek', () => {
             expect(logger).toHaveBeenNthCalledWith(3, 'third');
             expect(logger).toHaveBeenNthCalledWith(4, 'fourth');
             expect(logger).toHaveBeenNthCalledWith(5, 'fifth');
-        }
+        },
     );
 
     it.concurrent(
@@ -117,7 +122,7 @@ describe('peek', () => {
                 'third',
                 'thirdVal',
             ]);
-        }
+        },
     );
 
     it.concurrent(
@@ -136,6 +141,6 @@ describe('peek', () => {
             expect(logger).toHaveBeenNthCalledWith(1, ['first', 'firstVal']);
             expect(logger).toHaveBeenNthCalledWith(2, ['second', 'secondVal']);
             expect(logger).toHaveBeenNthCalledWith(3, ['third', 'thirdVal']);
-        }
+        },
     );
 });

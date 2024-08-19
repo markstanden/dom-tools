@@ -17,9 +17,9 @@ const { consoleLog } = prefixedConsole('PEEK');
  */
 export function peek(
     prefix: string = '',
-    logger: (...any: any[]) => void = consoleLog
-): (any: any) => any {
-    return function (any: any) {
+    logger: (...any: Object[]) => void = consoleLog
+): (any: Object) => Object {
+    return function (any: Object) {
         const message = `${prefix}:`;
         prefix ? logger(...[message, any]) : logger(any);
         return any;
