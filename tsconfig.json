@@ -1,9 +1,12 @@
 {
   "include": [
-    "src/**/*",
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.*"
   ],
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es2020",
     "types": [
       "vitest/globals"
     ],
@@ -12,18 +15,14 @@
         "./node_modules/*"
       ]
     },
-
     /* Modules */
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Bundler",
     "module": "ES2020",
     "rootDir": "src",
-
     /* Emit */
     "declaration": true,
     "outDir": "./build",
     "forceConsistentCasingInFileNames": true,
-
     /* Type Checking */
     "strict": true,
     "noImplicitAny": true,
@@ -42,7 +41,6 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-
     /* Completeness */
     "skipLibCheck": true
   }
