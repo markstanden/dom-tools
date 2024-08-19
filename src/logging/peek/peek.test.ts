@@ -1,9 +1,7 @@
 import { describe, vi } from 'vitest';
 import { peek } from './peek.js';
 
-const getMockLogger = () =>
-    vi.fn(() => (..._logItem: any[]): void => {
-    });
+const getMockLogger = () => vi.fn(() => (..._logItem: unknown[]): void => {});
 
 describe('peek', () => {
     it.concurrent('should not affect passed arguments', async ({ expect }) => {
@@ -34,7 +32,7 @@ describe('peek', () => {
             const result = initial.map(_peek);
 
             expect(result).toEqual(expected);
-        },
+        }
     );
 
     it.concurrent(
@@ -54,7 +52,7 @@ describe('peek', () => {
             const result = initial.map(_peek);
 
             expect(result).toEqual(expected);
-        },
+        }
     );
 
     it.concurrent('calls the logger once per item', async ({ expect }) => {
@@ -81,7 +79,7 @@ describe('peek', () => {
     });
 
     it.concurrent(
-        'doesn\'t add an empty string prefix to the log',
+        "doesn't add an empty string prefix to the log",
         async ({ expect }) => {
             const logger = getMockLogger();
             const _peek = peek(undefined, logger);
@@ -94,7 +92,7 @@ describe('peek', () => {
             expect(logger).toHaveBeenNthCalledWith(3, 'third');
             expect(logger).toHaveBeenNthCalledWith(4, 'fourth');
             expect(logger).toHaveBeenNthCalledWith(5, 'fifth');
-        },
+        }
     );
 
     it.concurrent(
@@ -122,7 +120,7 @@ describe('peek', () => {
                 'third',
                 'thirdVal',
             ]);
-        },
+        }
     );
 
     it.concurrent(
@@ -141,6 +139,6 @@ describe('peek', () => {
             expect(logger).toHaveBeenNthCalledWith(1, ['first', 'firstVal']);
             expect(logger).toHaveBeenNthCalledWith(2, ['second', 'secondVal']);
             expect(logger).toHaveBeenNthCalledWith(3, ['third', 'thirdVal']);
-        },
+        }
     );
 });

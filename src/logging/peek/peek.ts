@@ -7,21 +7,22 @@ const { consoleLog } = prefixedConsole('PEEK');
  * take a look at the state of the pipeline at that point.
  *
  * @example
- * [any, any, any]
- *     .map(peek('prefix'))   // prefix: [any, any, any]
- *     .map(x => x)           // Returns: [any, any, any]
+ * [arrayItem, arrayItem, arrayItem]
+ *     .map(peek('prefix'))   // prefix: [arrayItem, arrayItem, arrayItem]
+ *     .map(x => x)           // [arrayItem, arrayItem, arrayItem]
  *
  * @param {string} prefix defaults to "", prefix to ID this peek
- * @param {(...[any]) => void} logger defaults to consoleLog with a prefix 'PEEK'
- * @returns {(any) => any}
+ * @param {(...[unknown]) => void} logger defaults to consoleLog with a prefix 'PEEK'
+ * @returns {(unknown) => unknown}
  */
+
 export function peek(
     prefix: string = '',
-    logger: (...any: Object[]) => void = consoleLog
-): (any: Object) => Object {
-    return function (any: Object) {
-        const message = `${prefix}:`;
-        prefix ? logger(...[message, any]) : logger(any);
-        return any;
+    logger: (...logItem: unknown[]) => void = consoleLog
+): (arrayItem: unknown) => unknown {
+    return function (arrayItem: unknown) {
+        const formattedPrefix = `${prefix}:`;
+        prefix ? logger(...[formattedPrefix, arrayItem]) : logger(arrayItem);
+        return arrayItem;
     };
 }
