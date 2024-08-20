@@ -7,8 +7,13 @@
     "prettier"
   ],
   "rules": {
+    "no-unused-vars": 0,
     "@typescript-eslint/no-unused-vars": [
-      "warn"
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
     ],
     "no-console": "warn",
     "curly": [
@@ -24,7 +29,7 @@
     "lines-around-comment": [
       "warn",
       {
-        "afterBlockComment": true,
+        "afterBlockComment": false,
         "allowBlockStart": true,
         "allowObjectStart": true,
         "allowArrayStart": true
